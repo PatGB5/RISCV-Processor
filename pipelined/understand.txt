@@ -1,0 +1,16 @@
+beq x1, x1, 2
+nop
+add x1, x2, x3
+beq x1, x2, 2
+sub x3, x1, x2
+add x1, x1, x2
+add x1, x1, x1
+(regs[5'b01](x1=5)<=64'b101;//5
+regs[5'b10](x2=10)<=64'b01010;//10
+regs[5'b11](x3=20)<=64'b10100;//20
+regs[5'b100](x4=2)<=64'b10;//2)
+sd x3, 2(x4)
+sd x7, 0(x6)
+ld x5, 2(x4)
+or x5, x5, x1
+add x1, x1, x1

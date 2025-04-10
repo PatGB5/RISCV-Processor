@@ -1,0 +1,9 @@
+2008000A  // addi $t0, $zero, 10   ; $t0 = 10
+20090014  // addi $t1, $zero, 20   ; $t1 = 20
+01095020  // add  $t2, $t0, $t1    ; $t2 = 30  (10+20)
+AC0A0000  // sw   $t2, 0($zero)    ; Memory[0] = 30
+8C0B0000  // lw   $t3, 0($zero)    ; $t3 = 30
+114B0001  // beq  $t2, $t3, skip   ; if $t2 == $t3, branch (skip next instruction)
+200C0028  // addi $t4, $zero, 40   ; $t4 = 40 (skipped if branch taken)
+014C6820  // add  $t5, $t2, $t4    ; $t5 = $t2 + $t4 (if branch taken, $t4 remains 0, so $t5 = 30)
+08000000  // j    0               ; jump to address 0 (infinite loop)

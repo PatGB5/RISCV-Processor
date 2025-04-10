@@ -1,0 +1,12 @@
+    removed ld x1, 0(x2)       # Load from memory into x1 (data hazard with next instruction)
+    add x3, x1, x1     # Uses x1 before it is written back (RAW data hazard)
+    sub x4, x3, x1     # Uses x3 before it is written back (RAW data hazard)
+    sd x4, 8(x2)       # Store x4 (depends on previous instruction, another data hazard)
+    beq x4, x0, label  # Control hazard: branch depends on x4
+    or x5, x4, x3      # Uses x4 and x3 before they are written back (data hazard)
+    and x6, x5, x1     # Uses x5 before it's written back (data hazard)
+    add x7, x6, x3     # Uses x6 before it's written back (data hazard)
+    sub x8, x7, x4     # Uses x7 before it's written back (data hazard)
+label:
+    sd x8, 16(x2)      # Store x8, depends on previous computation
+    ld x9, 16(x2)
